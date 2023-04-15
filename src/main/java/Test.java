@@ -1,9 +1,12 @@
+import com.google.gson.Gson;
+import generate.GenerateRequest;
+import generate.GenerateTextResponse;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        GenerateText g = GenerateText.builder().max_tokens(40).return_likelihoods("NONE")
+        GenerateRequest g = GenerateRequest.builder().max_tokens(5).return_likelihoods("ALL")
                 .num_generations(1)
                 .truncate("END")
                 .prompt("Once upon a time in a magical land called")
@@ -17,7 +20,10 @@ public class Test {
                 .setBody(g.toJson())
                 .execute()
                 .toCompletableFuture()
-                .thenAccept(System.out::println)
+                .thenAccept((response) -> {
+                    GenerateTextResponse generateResponse1 = new Gson().fromJson(response.getResponseBody().toString(), GenerateTextResponse.class);
+                    System.out.println(generateResponse1.getGenerations().get(0).getText());
+                })
                 .join();
 
         client.close();

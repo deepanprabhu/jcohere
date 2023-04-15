@@ -1,3 +1,5 @@
+package generate;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.Builder;
@@ -11,7 +13,7 @@ import java.util.Set;
  */
 @Getter
 @Builder
-public class GenerateText {
+public class GenerateRequest {
     //required
     private String prompt;
 
