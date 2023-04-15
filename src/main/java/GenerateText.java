@@ -1,4 +1,3 @@
-import client.Client;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.Builder;
@@ -7,9 +6,12 @@ import lombok.Singular;
 
 import java.util.Set;
 
+/**
+ * This endpoint generates realistic text conditioned on a given input.
+ */
 @Getter
 @Builder
-public class Generate {
+public class GenerateText {
     //required
     private String prompt;
 
