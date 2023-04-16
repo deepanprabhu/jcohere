@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
+import util.AbstractRequest;
 
 import java.util.Set;
 
@@ -13,7 +14,7 @@ import java.util.Set;
  */
 @Getter
 @Builder
-public class GenerateRequest {
+public class GenerateRequest extends AbstractRequest {
     //required
     private String prompt;
 
