@@ -1,5 +1,7 @@
 # jCohere:
-The Java client encapsulating Jump to Content for Cohere AI is designed to help users generate realistic text that is conditioned on a given input. The client communicates with Cohere AI's API via HTTP requests and responses. This README provides information on how to install, configure and use the Java client to access Cohere AI's Jump to Content API.
+* jCohere is a pure java api client for accessing Co:Here API and Co:Here platform (https://docs.cohere.ai/docs).
+* Its under active development.
+* It would start to have advanced functions that makes using the platform as easy as it is right now, but would allow for Java's mighty ecosystem to allow other integrations.
 
 ## Prerequisites:
 
@@ -9,6 +11,6 @@ The Java client encapsulating Jump to Content for Cohere AI is designed to help 
 
 ## Installation:
 
-* Clone the Cohere AI Java client repository from https://github.com/cohere-ai/java-client
+* Clone the Cohere AI Java client repository from https://github.com/deepanprabhu/jcohere
 * Navigate to the cloned repository in your terminal or command prompt
 * Run the following command to install the client: mvn install
