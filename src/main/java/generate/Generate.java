@@ -6,6 +6,10 @@ import org.asynchttpclient.DefaultAsyncHttpClient;
 import java.util.function.Consumer;
 
 public class Generate {
+    public static final String APPLICATION_JSON = "application/json";
+    public static final String api = "generate";
+    public static final String BEARER_TOKEN = "Bearer EYDw0tRskgBoj1zMGePk14hzch9TVLu1Zw7iND19";
+
     public static void hit(Consumer<String> consu) throws Exception {
         GenerateRequest g = GenerateRequest.builder().max_tokens(5).return_likelihoods("GENERATION")
                 .num_generations(1)
@@ -14,10 +18,10 @@ public class Generate {
                 .build();
 
         AsyncHttpClient client = new DefaultAsyncHttpClient();
-        client.prepare("POST", "https://api.cohere.ai/v1/generate")
-                .setHeader("accept", "application/json")
-                .setHeader("content-type", "application/json")
-                .setHeader("authorization", String.format("Bearer %s","EYDw0tRskgBoj1zMGePk14hzch9TVLu1Zw7iND19"))
+        client.prepare("POST", String.format("https://api.cohere.ai/v1/%s", api))
+                .setHeader("accept", APPLICATION_JSON)
+                .setHeader("content-type", APPLICATION_JSON)
+                .setHeader("authorization", BEARER_TOKEN)
                 .setBody(g.toJson())
                 .execute()
                 .toCompletableFuture()

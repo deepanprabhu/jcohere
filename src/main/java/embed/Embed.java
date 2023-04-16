@@ -9,14 +9,22 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 public class Embed {
+    public static final String APPLICATION_JSON = "application/json";
+    public static final String api = "embed";
+    public static final String BEARER_TOKEN = "Bearer EYDw0tRskgBoj1zMGePk14hzch9TVLu1Zw7iND19";
+
     public static void main(String[] args) throws Exception {
-        EmbedRequest embedRequest = EmbedRequest.builder().texts(new HashSet<>(Arrays.asList("hello", "goodbye")))
-                .truncate("END").build();
+        EmbedRequest embedRequest = EmbedRequest
+                .builder()
+                .texts(new HashSet<>(Arrays.asList("hello", "goodbye")))
+                .truncate("END")
+                .build();
+
         AsyncHttpClient client = new DefaultAsyncHttpClient();
-        client.prepare("POST", "https://api.cohere.ai/v1/embed")
-                .setHeader("accept", "application/json")
-                .setHeader("content-type", "application/json")
-                .setHeader("authorization", "Bearer EYDw0tRskgBoj1zMGePk14hzch9TVLu1Zw7iND19")
+        client.prepare("POST", String.format("https://api.cohere.ai/v1/%s", api))
+                .setHeader("accept", APPLICATION_JSON)
+                .setHeader("content-type", APPLICATION_JSON)
+                .setHeader("authorization", BEARER_TOKEN)
                 .setBody(embedRequest.toJson())
                 .execute()
                 .toCompletableFuture()
