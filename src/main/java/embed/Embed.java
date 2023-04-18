@@ -1,5 +1,6 @@
 package embed;
 
+import client.Client;
 import com.google.gson.Gson;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
@@ -20,21 +21,8 @@ public class Embed {
                 .truncate("END")
                 .build();
 
-        AsyncHttpClient client = new DefaultAsyncHttpClient();
-        client.prepare("POST", String.format("https://api.cohere.ai/v1/%s", api))
-                .setHeader("accept", APPLICATION_JSON)
-                .setHeader("content-type", APPLICATION_JSON)
-                .setHeader("authorization", BEARER_TOKEN)
-                .setBody(embedRequest.toJson())
-                .execute()
-                .toCompletableFuture()
-                .thenAccept((response)-> {
-                    System.out.println(response.toString());
-                    EmbedResponse embedResponse = new Gson().fromJson(response.getResponseBody().toString(), EmbedResponse.class);
-                    System.out.println(embedResponse.getMeta().getApiVersion().getVersion());
-                })
-                .join();
-
-        client.close();
+        Client.hit(api, BEARER_TOKEN, embedRequest, (str)-> {
+            System.out.println(str);
+        });
     }
 }
