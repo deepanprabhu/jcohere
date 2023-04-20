@@ -1,6 +1,7 @@
 package classify;
 
 import client.Client;
+import com.google.gson.Gson;
 import embed.EmbedRequest;
 
 import java.util.Arrays;
@@ -35,7 +36,8 @@ public class Classify {
                 .build();
 
         Client.hit(api, BEARER_TOKEN, classifyRequest, (str)-> {
-            System.out.println(str);
+            ClassifyResponse classifyResponse = new Gson().fromJson(str, ClassifyResponse.class);
+            System.out.println(classifyResponse.getId());
         });
     }
 }
